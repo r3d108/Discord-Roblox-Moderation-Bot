@@ -1,0 +1,3 @@
+@commands.has_role("Moderator")
+async def ban(ctx, user: discord.User, *, reason=None):
+    # Ban logic goes here
