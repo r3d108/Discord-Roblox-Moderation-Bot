@@ -1,7 +1,7 @@
-# Node modules directory (reinstalled via package.json)
+# Node modules folder (dependencies will be installed via package.json)
 node_modules/
 
-# Local environment files (store sensitive data here)
+# Environment variables file (contains sensitive data like tokens)
 .env
 
 # Log files
@@ -13,6 +13,6 @@ npm-debug.log*
 .DS_Store
 Thumbs.db
 
-# Editor-specific directories (optional)
+# Editor-specific files (optional)
 .vscode/
 .idea/
