@@ -1,7 +1,7 @@
-# Node modules directory (reinstalled automatically via package.json)
+# Node modules directory (reinstalled via package.json)
 node_modules/
 
-# Environment variables (store secrets like your Discord token here)
+# Local environment files (store sensitive data here)
 .env
 
 # Log files
