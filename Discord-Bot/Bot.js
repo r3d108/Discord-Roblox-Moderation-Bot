@@ -1,3 +1,5 @@
+require('dotenv').config(); // Load environment variables from .env
+
 const { Client, GatewayIntentBits } = require('discord.js');
 const axios = require('axios');
 const sqlite3 = require('sqlite3').verbose();
@@ -9,6 +11,9 @@ const client = new Client({
     GatewayIntentBits.MessageContent
   ]
 });
+
+// Retrieve the token from the environment variables
+const token = process.env.DISCORD_BOT_TOKEN;
 
 // Set up SQLite database
 const db = new sqlite3.Database('./bans.db', (err) => {
@@ -25,7 +30,7 @@ const db = new sqlite3.Database('./bans.db', (err) => {
 });
 
 // Command prefix and role requirement
-const prefix = '!';
+const prefix = process.env.BOT_PREFIX || '!';
 const allowedRole = 'Moderator';
 
 client.on('messageCreate', async (message) => {
@@ -54,7 +59,7 @@ client.on('messageCreate', async (message) => {
       message.reply(`Player ${username} (Roblox ID: ${robloxID}) has been banned.`);
       
       // Send HTTP POST to cloud endpoint
-      axios.post('https://your-cloud-endpoint.com/api/ban', {
+      axios.post(process.env.CLOUD_API_URL + '/api/ban', {
         roblox_id: robloxID,
         username: username
       })
@@ -64,4 +69,4 @@ client.on('messageCreate', async (message) => {
   }
 });
 
-client.login('YOUR_DISCORD_BOT_TOKEN');
+client.login(token);
