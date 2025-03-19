@@ -3,7 +3,7 @@ const sqlite3 = require('sqlite3').verbose();
 const app = express();
 app.use(express.json());
 
-// Connect to the same SQLite database (or use your preferred DB)
+// sqlite database connection
 const db = new sqlite3.Database('./bans.db', (err) => {
   if (err) console.error('Database error:', err);
   else {
@@ -16,7 +16,7 @@ const db = new sqlite3.Database('./bans.db', (err) => {
   }
 });
 
-// Endpoint to add a ban (called by the Discord bot)
+// Endpoint to add a ban which is then called with the Discord bot (all yap)
 app.post('/api/ban', (req, res) => {
   const { roblox_id, username } = req.body;
   if (!roblox_id || !username) return res.status(400).send({ error: 'Missing parameters.' });
@@ -27,7 +27,7 @@ app.post('/api/ban', (req, res) => {
   });
 });
 
-// Endpoint for Roblox to retrieve the ban list
+// Let's roblox retrieve ban list
 app.get('/api/bans', (req, res) => {
   db.all("SELECT * FROM bans", [], (err, rows) => {
     if (err) return res.status(500).send({ error: 'Database error.' });
